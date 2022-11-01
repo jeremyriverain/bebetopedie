@@ -1,85 +1,143 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
+  <div class="container">
+    <div class="has-text-centered">
+      <img class="acnh-logo" width="300px"
+        src="https://image.jimcdn.com/app/cms/image/transf/dimension=1070x10000:format=png/path/s2d75ac45bde449f0/image/ie1a596faec4848b8/version/1560528561/image.png">
     </div>
-  </header>
+    <div class="card mx-2 my-2">
+      <div class="card-content">
+        <form>
+          <div class="field is-horizontal">
+            <div class="field-label">
+              <label class="label">Filtrer les animaux:</label>
+            </div>
+            <div class="field-body">
+              <div class="field is-narrow">
+                <div class="control">
+                  <label class="checkbox ml-3">
+                    <input type="checkbox" checked>
+                    Créatures marines
+                  </label>
+                  <label class="checkbox ml-3">
+                    <input type="checkbox" checked>
+                    Papillons
+                  </label>
+                  <label class="checkbox ml-3">
+                    <input type="checkbox" checked>
+                    Poissons
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
 
-  <RouterView />
+          <div class="has-text-right">
+            <button class="button">
+              <span class="icon">
+                <!-- <i class="fa-solid fa-arrow-down-a-z"></i> -->
+                <i class="fa-solid fa-arrow-up-a-z"></i>
+              </span>
+              <span>Trier Z-A</span>
+            </button>
+          </div>
+
+
+        </form>
+      </div>
+    </div>
+
+    <div class="animal-container">
+
+      <div class="card animal-item mx-2 my-2">
+
+        <div class="card-content">
+          <div class="media">
+            <div class="media-left">
+              <figure class="image is-64x64">
+                <img src="https://acnhapi.com/v1/icons/sea/1" alt="alga wakame">
+              </figure>
+            </div>
+            <div class="media-content">
+              <p class="title is-4">Alga wakame</p>
+
+            </div>
+          </div>
+
+          <div class="content">
+            Let it be known that seaweed is a misnomer of the highest order! That is, it is not a noxious weed so much
+            as it is a marine algae most beneficial to life on land and sea. Seaweed, you see, provides essential
+            habitat and food for all manner of marine creatures. And it creates a great deal of the oxygen we land
+            lovers love to breath too, hoo! And yet, I can't help but shudder when the slimy stuff touches my toes
+            during a swim. Hoot! The horror!
+          </div>
+        </div>
+      </div>
+      <div class="card animal-item mx-2 my-2">
+
+        <div class="card-content">
+          <div class="media">
+            <div class="media-left">
+              <figure class="image is-64x64">
+                <img src="https://acnhapi.com/v1/icons/fish/1" alt="amarguillo">
+              </figure>
+            </div>
+            <div class="media-content">
+              <p class="title is-4">Amarguillo</p>
+
+            </div>
+          </div>
+
+          <div class="content">
+            Bitterlings hide their eggs inside large bivalves—like clams—where the young can stay safe until grown.
+            The bitterling isn't being sneaky. No, their young help keep the bivalve healthy by eating invading
+            parasites! It's a wonderful bit of evolutionary deal making, don't you think? Each one keeping the other
+            safe... Though eating parasites does not sound like a happy childhood... Is that why the fish is so
+            bitter?
+          </div>
+        </div>
+      </div>
+
+      <div class="card animal-item mx-2 my-2">
+
+        <div class="card-content">
+          <div class="media">
+            <div class="media-left">
+              <figure class="image is-64x64">
+                <img src="https://acnhapi.com/v1/icons/bugs/1" alt="common butterfly">
+              </figure>
+            </div>
+            <div class="media-content">
+              <p class="title is-4">Common butterfly</p>
+
+            </div>
+          </div>
+
+          <div class="content">
+            The common butterfly would have you believe it is but a beautiful friend flitting prettily about the
+            flowers. Bah, I say! They may seem innocent things with their pretty white wings, but they hide a dark
+            side!
+            The common butterfly caterpillar is called a cabbage worm, you see, and it's a most voracious pest. The
+            ravenous beasts chew through cabbage, broccoli, kale and the like with a devastating gusto. And my
+            feathers!
+            Their green coloring is truly GROSS! A hoo-rrific hue, I say.
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+@media screen and (min-width: 768px) {
+  .animal-container {
+    display: grid;
+    grid-template-columns: auto auto;
   }
+}
 
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+.animal-item .media {
+  align-items: center;
 }
 </style>
