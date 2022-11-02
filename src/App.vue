@@ -23,7 +23,7 @@
                   </label>
                   <label class="checkbox ml-3">
                     <input type="checkbox" checked />
-                    Papillons
+                    Insectes
                   </label>
                   <label class="checkbox ml-3">
                     <input type="checkbox" checked />
@@ -129,7 +129,7 @@
             </div>
             <div class="media-right">
               <div class="has-text-right">
-                <span class="tag is-butterfly">Papillon</span>
+                <span class="tag is-bug">Insecte</span>
               </div>
             </div>
           </div>
@@ -177,7 +177,7 @@
   color: #fff;
 }
 
-.tag.is-butterfly {
+.tag.is-bug {
   background-color: #ffe08a;
   color: rgba(0, 0, 0, 0.7);
 }
