@@ -1,52 +1,7 @@
 <template>
   <div class="container">
-    <div class="has-text-centered">
-      <img
-        class="acnh-logo"
-        width="300"
-        src="https://image.jimcdn.com/app/cms/image/transf/dimension=1070x10000:format=png/path/s2d75ac45bde449f0/image/ie1a596faec4848b8/version/1560528561/image.png"
-      />
-    </div>
-    <div class="card mx-2 my-2">
-      <div class="card-content">
-        <form class="animal-form">
-          <div class="field is-horizontal">
-            <div class="field-label">
-              <label class="label">Filtrer les animaux:</label>
-            </div>
-            <div class="field-body">
-              <div class="field is-narrow">
-                <div class="control">
-                  <label class="checkbox ml-3">
-                    <input type="checkbox" checked />
-                    Créatures marines
-                  </label>
-                  <label class="checkbox ml-3">
-                    <input type="checkbox" checked />
-                    Insectes
-                  </label>
-                  <label class="checkbox ml-3">
-                    <input type="checkbox" checked />
-                    Poissons
-                  </label>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="has-text-right ml-3">
-            <button class="button">
-              <span class="icon">
-                <!-- <i class="fa-solid fa-arrow-down-a-z"></i> -->
-                <i class="fa-solid fa-arrow-up-a-z"></i>
-              </span>
-              <span>Trier Z-A</span>
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-
+    <TheHeaderImage />
+    <SearchForm class="mx-2 my-2" />
     <div class="animal-container">
       <div class="card animal-item mx-2 my-2">
         <div class="card-content">
@@ -150,6 +105,11 @@
   </div>
 </template>
 
+<script setup>
+import TheHeaderImage from '@/components/TheHeaderImage.vue'
+import SearchForm from '@/components/SearchForm.vue'
+</script>
+
 <style scoped>
 @media screen and (min-width: 768px) {
   .animal-container {
@@ -159,12 +119,6 @@
 }
 
 .animal-item .media {
-  align-items: center;
-}
-
-.animal-form {
-  display: grid;
-  grid-template-columns: auto auto;
   align-items: center;
 }
 
