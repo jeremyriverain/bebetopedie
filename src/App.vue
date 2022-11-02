@@ -62,6 +62,11 @@
             <div class="media-content">
               <p class="title is-4">Alga wakame</p>
             </div>
+            <div class="media-right">
+              <div class="has-text-right">
+                <span class="tag is-sea">Créature marine</span>
+              </div>
+            </div>
           </div>
 
           <div class="content">
@@ -88,6 +93,11 @@
             </div>
             <div class="media-content">
               <p class="title is-4">Amarguillo</p>
+            </div>
+            <div class="media-right">
+              <div class="has-text-right">
+                <span class="tag is-fish">Poisson</span>
+              </div>
             </div>
           </div>
 
@@ -116,6 +126,11 @@
             </div>
             <div class="media-content">
               <p class="title is-4">Common butterfly</p>
+            </div>
+            <div class="media-right">
+              <div class="has-text-right">
+                <span class="tag is-butterfly">Papillon</span>
+              </div>
             </div>
           </div>
 
@@ -151,5 +166,19 @@
   display: grid;
   grid-template-columns: auto auto;
   align-items: center;
+}
+
+.tag.is-fish {
+  background-color: #f14668;
+  color: #fff;
+}
+.tag.is-sea {
+  background-color: #48c78e;
+  color: #fff;
+}
+
+.tag.is-butterfly {
+  background-color: #ffe08a;
+  color: rgba(0, 0, 0, 0.7);
 }
 </style>
