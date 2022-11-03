@@ -10,15 +10,15 @@
             <div class="field is-narrow">
               <div class="control">
                 <label class="checkbox ml-3">
-                  <input type="checkbox" checked />
+                  <input type="checkbox" v-model="types" value="sea" />
                   Créatures marines
                 </label>
                 <label class="checkbox ml-3">
-                  <input type="checkbox" checked />
+                  <input type="checkbox" v-model="types" value="bug" />
                   Insectes
                 </label>
                 <label class="checkbox ml-3">
-                  <input type="checkbox" checked />
+                  <input type="checkbox" v-model="types" value="fish" />
                   Poissons
                 </label>
               </div>
@@ -27,18 +27,45 @@
         </div>
 
         <div class="has-text-right ml-3">
-          <button class="button">
+          <button
+            class="button"
+            @click.prevent="$emit('update:ascendingOrder', !ascendingOrder)"
+          >
             <span class="icon">
-              <!-- <i class="fa-solid fa-arrow-down-a-z"></i> -->
-              <i class="fa-solid fa-arrow-up-a-z"></i>
+              <i v-if="ascendingOrder" class="fa-solid fa-arrow-up-a-z"></i>
+              <i v-else class="fa-solid fa-arrow-down-a-z"></i>
             </span>
-            <span>Trier Z-A</span>
+            <span v-if="ascendingOrder">Trier Z-A</span>
+            <span v-else>Trier A-Z</span>
           </button>
         </div>
       </form>
     </div>
   </div>
 </template>
+
+<script setup>
+import { ref, watch } from 'vue'
+
+const props = defineProps({
+  ascendingOrder: {
+    type: Boolean,
+    required: true,
+  },
+  animalTypes: {
+    type: Array,
+    required: true,
+  },
+})
+
+const emits = defineEmits(['update:ascendingOrder', 'update:animalTypes'])
+
+const types = ref(props.animalTypes)
+
+watch(types, () => {
+  emits('update:animalTypes', types.value)
+})
+</script>
 
 <style scoped>
 .animal-form {
