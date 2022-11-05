@@ -28,17 +28,32 @@ import TheHeaderImage from '@/components/TheHeaderImage.vue'
 import SearchForm from '@/components/SearchForm.vue'
 import CardAnimal from '@/components/CardAnimal.vue'
 
-import bugs from '@/data/bugs.json'
-import fishes from '@/data/fish.json'
-import seaCreatures from '@/data/sea.json'
+const bugs = ref({})
+const fishes = ref({})
+const seaCreatures = ref({})
+
+;(async () => {
+  const promises = [
+    fetch('http://acnhapi.com/v1/bugs').then((r) => r.json()),
+    fetch('http://acnhapi.com/v1/fish').then((r) => r.json()),
+    fetch('http://acnhapi.com/v1/sea').then((r) => r.json()),
+  ]
+
+  const [bugsResponse, fishResponse, seaCreaturesResponse] = await Promise.all(
+    promises
+  )
+  bugs.value = bugsResponse
+  fishes.value = fishResponse
+  seaCreatures.value = seaCreaturesResponse
+})()
 
 const ascendingOrder = ref(true)
 const animalTypes = ref(['sea', 'fish', 'bug'])
 
 const animals = computed(() => ({
-  ...(animalTypes.value.includes('bug') ? bugs : {}),
-  ...(animalTypes.value.includes('fish') ? fishes : {}),
-  ...(animalTypes.value.includes('sea') ? seaCreatures : {}),
+  ...(animalTypes.value.includes('bug') ? bugs.value : {}),
+  ...(animalTypes.value.includes('fish') ? fishes.value : {}),
+  ...(animalTypes.value.includes('sea') ? seaCreatures.value : {}),
 }))
 
 const sortedAnimals = computed(() => {
@@ -47,6 +62,7 @@ const sortedAnimals = computed(() => {
   if (!ascendingOrder.value) {
     sortedKeys.reverse()
   }
+
   return sortedKeys.reduce(function (acc, key) {
     acc[key] = animals.value[key]
     return acc
