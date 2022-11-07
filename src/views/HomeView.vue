@@ -32,9 +32,9 @@ const seaCreatures = ref({})
 
 ;(async () => {
   const promises = [
-    fetch('http://acnhapi.com/v1/bugs').then((r) => r.json()),
-    fetch('http://acnhapi.com/v1/fish').then((r) => r.json()),
-    fetch('http://acnhapi.com/v1/sea').then((r) => r.json()),
+    fetch('https://acnhapi.com/v1/bugs').then((r) => r.json()),
+    fetch('https://acnhapi.com/v1/fish').then((r) => r.json()),
+    fetch('https://acnhapi.com/v1/sea').then((r) => r.json()),
   ]
 
   const [bugsResponse, fishResponse, seaCreaturesResponse] = await Promise.all(
