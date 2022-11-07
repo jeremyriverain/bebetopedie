@@ -66,3 +66,17 @@ npm run test:e2e
 ```sh
 npm run lint
 ```
+
+### Docker
+
+```bash
+docker build --target dev --build-arg UID=$(id -u) --build-arg GID=$(id -g) -t app-dev .
+docker run -p 5173:5173 -v $(pwd):/home/app --name app-dev -d app-dev
+docker exec -it app-dev bash
+npm run dev -- --host
+```
+
+```bash
+docker build --target prod --build-arg UID=$(id -u) --build-arg GID=$(id -g) -t app-prod .
+docker run -p 3000:3000 --name app-prod -d app-prod
+```
