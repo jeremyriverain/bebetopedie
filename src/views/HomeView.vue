@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <TheHeaderImage />
     <SearchForm
       class="mx-2 my-2"
       v-model:animalTypes="animalTypes"
@@ -24,7 +23,6 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import TheHeaderImage from '@/components/TheHeaderImage.vue'
 import SearchForm from '@/components/SearchForm.vue'
 import CardAnimal from '@/components/CardAnimal.vue'
 

@@ -1,10 +1,10 @@
 <template>
-  <span v-if="isBug" class="tag is-bug">Insecte</span>
-  <span v-else-if="isFish" class="tag is-fish">Poisson</span>
-  <span v-else class="tag is-sea">Créature marine</span>
+  <span v-if="isBug" class="tag is-bug">Bug</span>
+  <span v-else-if="isFish" class="tag is-fish">Fish</span>
+  <span v-else class="tag is-sea">Sea creature</span>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue'
 const props = defineProps({
   animal: {

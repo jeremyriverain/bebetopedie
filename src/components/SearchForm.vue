@@ -11,15 +11,15 @@
               <div class="control">
                 <label class="checkbox ml-3">
                   <input type="checkbox" v-model="types" value="sea" />
-                  Créatures marines
+                  Sea creatures
                 </label>
                 <label class="checkbox ml-3">
                   <input type="checkbox" v-model="types" value="bug" />
-                  Insectes
+                  Bugs
                 </label>
                 <label class="checkbox ml-3">
                   <input type="checkbox" v-model="types" value="fish" />
-                  Poissons
+                  Fishes
                 </label>
               </div>
             </div>
@@ -44,7 +44,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, watch } from 'vue'
 
 const props = defineProps({

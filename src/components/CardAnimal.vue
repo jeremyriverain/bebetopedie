@@ -8,7 +8,7 @@
           </figure>
         </div>
         <div class="media-content">
-          <p class="title is-4">{{ animal['name']['name-EUen'] }}</p>
+          <p class="title is-4">{{ animal.name['name-EUen'] }}</p>
         </div>
         <div class="media-right">
           <div class="has-text-right">
@@ -24,12 +24,14 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import AnimalType from '@/components/AnimalType.vue'
+import type { AnimalInterface } from '@/model'
+import type { PropType } from 'vue'
 
 defineProps({
   animal: {
-    type: Object,
+    type: Object as PropType<AnimalInterface>,
     required: true,
   },
 })
