@@ -75,6 +75,7 @@ npm run lint
 docker build --target dev --build-arg UID=$(id -u) --build-arg GID=$(id -g) -t app-dev .
 docker run -p 5173:5173 -v $(pwd):/home/appuser/my_app --name app-dev -d app-dev
 docker exec -it app-dev bash
+npm install
 npm run dev -- --host
 ```
 

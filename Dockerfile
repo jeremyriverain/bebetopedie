@@ -1,4 +1,4 @@
-FROM node:18-bullseye as builder
+FROM node:18-bullseye as base-builder
 ARG UID
 ARG GID
 RUN echo "uid: $UID, gid: $GID"
@@ -15,16 +15,18 @@ WORKDIR /home/appuser/my_app
 COPY . .
 RUN chown -R appuser:appuser /home/appuser
 USER appuser
-RUN npm install
-RUN npm run build
 
-FROM builder as dev 
+FROM base-builder as dev 
 EXPOSE 5173
 ENTRYPOINT [ "tail",  "-f",  "/dev/null" ]
+
+FROM base-builder as builder-prod
+RUN npm install
+RUN npm run build
 
 FROM nginx:stable-alpine as prod
 EXPOSE 3000
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 RUN rm -rf /usr/share/nginx/html/*
-COPY --from=builder /home/appuser/my_app/dist /usr/share/nginx/html
+COPY --from=builder-prod /home/appuser/my_app/dist /usr/share/nginx/html
 CMD ["nginx", "-g", "daemon off;"]
