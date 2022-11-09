@@ -1,42 +1,33 @@
 import { defineStore } from 'pinia'
 import type { AnimalInterface, AnimalType, SearchAnimalsParams } from '@/model'
+import { sortAnimals } from '@/utils'
 
 export const useStore = defineStore('main', {
   state() {
     return {
-      bugs: {},
-      fish: {},
-      sea: {},
+      bugs: [],
+      fish: [],
+      sea: [],
       isFetching: true,
       ascendingOrder: true,
       animalTypesSelected: ['bugs', 'fish', 'sea'],
-    } as Record<AnimalType, Record<string, AnimalInterface>> & {
+    } as Record<AnimalType, AnimalInterface[]> & {
       isFetching: boolean
     } & SearchAnimalsParams
   },
   getters: {
-    selectedAnimals(): Record<string, AnimalInterface> {
-      return {
-        ...(this.animalTypesSelected.includes('bugs') ? this.bugs : {}),
-        ...(this.animalTypesSelected.includes('fish') ? this.fish : {}),
-        ...(this.animalTypesSelected.includes('sea') ? this.sea : {}),
-      }
+    selectedAnimals(): AnimalInterface[] {
+      return [
+        ...(this.animalTypesSelected.includes('bugs') ? this.bugs : []),
+        ...(this.animalTypesSelected.includes('fish') ? this.fish : []),
+        ...(this.animalTypesSelected.includes('sea') ? this.sea : []),
+      ]
     },
-    sortedAnimals(): Record<string, AnimalInterface> {
-      const sortedKeys = Object.keys(this.selectedAnimals).sort()
-      const selectedAnimals = this.selectedAnimals
-
-      if (!this.ascendingOrder) {
-        sortedKeys.reverse()
-      }
-      return sortedKeys.reduce<Record<string, AnimalInterface>>(function (
-        acc,
-        key
-      ) {
-        acc[key] = selectedAnimals[key]
-        return acc
-      },
-      {})
+    sortedAnimals(): AnimalInterface[] {
+      return sortAnimals(this.selectedAnimals, this.ascendingOrder)
+    },
+    reversedSortedAnimals(): AnimalInterface[] {
+      return sortAnimals(this.selectedAnimals, this.ascendingOrder)
     },
     hasResult() {
       return Object.keys(this.sortedAnimals).length > 0
@@ -53,9 +44,11 @@ export const useStore = defineStore('main', {
 
         const [bugsResponse, fishResponse, seaCreaturesResponse] =
           await Promise.all(promises)
-        this.bugs = bugsResponse
-        this.fish = fishResponse
-        this.sea = seaCreaturesResponse
+        this.bugs = Object.keys(bugsResponse).map((key) => bugsResponse[key])
+        this.fish = Object.keys(fishResponse).map((key) => fishResponse[key])
+        this.sea = Object.keys(seaCreaturesResponse).map(
+          (key) => seaCreaturesResponse[key]
+        )
       } finally {
         this.isFetching = false
       }

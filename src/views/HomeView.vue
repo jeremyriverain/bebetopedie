@@ -3,8 +3,8 @@
     <SearchForm class="mx-2 my-2" />
     <div class="animal-container" v-if="hasResult">
       <CardAnimal
-        v-for="(animal, key) in sortedAnimals"
-        :key="key"
+        v-for="animal in sortedAnimals"
+        :key="animal.icon_uri"
         :animal="animal"
         class="mx-2 my-2"
       />
@@ -27,7 +27,9 @@ const store = useStore()
 
 const isFetching = computed(() => store.isFetching)
 
-const sortedAnimals = computed(() => store.sortedAnimals)
+const sortedAnimals = computed(() =>
+  store.ascendingOrder ? store.sortedAnimals : store.reversedSortedAnimals
+)
 
 const hasResult = computed(() => store.hasResult)
 </script>

@@ -8,3 +8,18 @@ export function resolveAnimalType(animal: AnimalInterface): AnimalType {
   }
   return 'fish'
 }
+
+export function sortAnimals(
+  animals: AnimalInterface[],
+  ascendingOrder: boolean
+): AnimalInterface[] {
+  return animals.sort(function (a, b) {
+    const x = a.name['name-EUen'].toLowerCase()
+    const y = b.name['name-EUen'].toLowerCase()
+
+    if (x > y) {
+      return ascendingOrder ? 1 : -1
+    }
+    return ascendingOrder ? -1 : 1
+  })
+}
