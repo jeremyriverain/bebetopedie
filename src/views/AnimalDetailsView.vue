@@ -1,6 +1,14 @@
 <template>
   <div class="card animal-item mx-2 my-2" v-if="animal">
     <div class="card-content">
+      <nav class="breadcrumb" aria-label="breadcrumbs">
+        <ul>
+          <li><RouterLink to="/">Homepage</RouterLink></li>
+          <li class="is-active">
+            <a href="#" aria-current="page">{{ animal.name['name-EUen'] }}</a>
+          </li>
+        </ul>
+      </nav>
       <div class="media">
         <div class="media-left">
           <figure class="image is-64x64">
@@ -25,10 +33,12 @@
 </template>
 
 <script setup lang="ts">
-import type { PropType } from 'vue'
-import { ref } from 'vue'
-import type { AnimalInterface, AnimalType as AnimalTypeEnum } from '@/model'
+import { computed, type PropType } from 'vue'
+import type { AnimalType as AnimalTypeEnum } from '@/model'
 import AnimalType from '@/components/AnimalType.vue'
+import { useStore } from '@/store'
+
+const store = useStore()
 
 const props = defineProps({
   type: {
@@ -41,11 +51,21 @@ const props = defineProps({
   },
 })
 
-const animal = ref<AnimalInterface | null>(null)
+const animal = computed(() => {
+  const key = Object.keys(store[props.type]).find(
+    (key) => store[props.type][key].id.toString() === props.id
+  )
 
-;(async () => {
-  animal.value = await (
-    await fetch(`https://acnhapi.com/v1/${props.type}/${props.id}`)
-  ).json()
-})()
+  if (!key) {
+    return null
+  }
+
+  return store[props.type][key]
+})
 </script>
+
+<style scoped>
+.animal-item .media {
+  align-items: center;
+}
+</style>

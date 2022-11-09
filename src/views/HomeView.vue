@@ -13,12 +13,7 @@
         class="mx-2 my-2"
       />
     </div>
-    <article class="message is-danger mx-2" v-else-if="error">
-      <div class="message-body">
-        {{ error }}
-      </div>
-    </article>
-    <article class="message is-dark mx-2" v-else-if="!isLoading">
+    <article class="message is-dark mx-2" v-else-if="!isFetching">
       <div class="message-body">
         Aucun résultat ne correspond à votre recherche
       </div>
@@ -30,33 +25,15 @@
 import { ref, computed } from 'vue'
 import SearchForm from '@/components/SearchForm.vue'
 import CardAnimal from '@/components/CardAnimal.vue'
+import { useStore } from '@/store'
 
-const bugs = ref({})
-const fishes = ref({})
-const seaCreatures = ref({})
+const store = useStore()
 
-const isLoading = ref(true)
-const error = ref(null)
+const bugs = computed(() => store.bugs)
+const fishes = computed(() => store.fish)
+const seaCreatures = computed(() => store.sea)
 
-;(async () => {
-  try {
-    const promises = [
-      fetch('https://acnhapi.com/v1/bugs').then((r) => r.json()),
-      fetch('https://acnhapi.com/v1/fish').then((r) => r.json()),
-      fetch('https://acnhapi.com/v1/sea').then((r) => r.json()),
-    ]
-
-    const [bugsResponse, fishResponse, seaCreaturesResponse] =
-      await Promise.all(promises)
-    bugs.value = bugsResponse
-    fishes.value = fishResponse
-    seaCreatures.value = seaCreaturesResponse
-  } catch (error) {
-    error.value = 'Une erreur est survenue pendant la récupération des données.'
-  } finally {
-    isLoading.value = false
-  }
-})()
+const isFetching = computed(() => store.isFetching)
 
 const ascendingOrder = ref(true)
 const animalTypes = ref(['sea', 'fish', 'bug'])
