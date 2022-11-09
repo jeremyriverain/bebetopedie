@@ -13,7 +13,12 @@
         class="mx-2 my-2"
       />
     </div>
-    <article class="message is-dark mx-2" v-else>
+    <article class="message is-danger mx-2" v-else-if="error">
+      <div class="message-body">
+        {{ error }}
+      </div>
+    </article>
+    <article class="message is-dark mx-2" v-else-if="!isLoading">
       <div class="message-body">
         Aucun résultat ne correspond à votre recherche
       </div>
@@ -30,19 +35,27 @@ const bugs = ref({})
 const fishes = ref({})
 const seaCreatures = ref({})
 
-;(async () => {
-  const promises = [
-    fetch('https://acnhapi.com/v1/bugs').then((r) => r.json()),
-    fetch('https://acnhapi.com/v1/fish').then((r) => r.json()),
-    fetch('https://acnhapi.com/v1/sea').then((r) => r.json()),
-  ]
+const isLoading = ref(true)
+const error = ref(null)
 
-  const [bugsResponse, fishResponse, seaCreaturesResponse] = await Promise.all(
-    promises
-  )
-  bugs.value = bugsResponse
-  fishes.value = fishResponse
-  seaCreatures.value = seaCreaturesResponse
+;(async () => {
+  try {
+    const promises = [
+      fetch('https://acnhapi.com/v1/bugs').then((r) => r.json()),
+      fetch('https://acnhapi.com/v1/fish').then((r) => r.json()),
+      fetch('https://acnhapi.com/v1/sea').then((r) => r.json()),
+    ]
+
+    const [bugsResponse, fishResponse, seaCreaturesResponse] =
+      await Promise.all(promises)
+    bugs.value = bugsResponse
+    fishes.value = fishResponse
+    seaCreatures.value = seaCreaturesResponse
+  } catch (error) {
+    error.value = 'Une erreur est survenue pendant la récupération des données.'
+  } finally {
+    isLoading.value = false
+  }
 })()
 
 const ascendingOrder = ref(true)
