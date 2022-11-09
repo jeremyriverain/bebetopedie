@@ -6,7 +6,7 @@ export const router = createRouter({
   routes: [
     { path: '/', component: HomeView },
     {
-      path: '/:id',
+      path: '/:type/:id',
       component: () => import('@/views/AnimalDetailsView.vue'),
       props: true,
       name: 'animal_details',

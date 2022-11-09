@@ -4,7 +4,7 @@
       <form class="animal-form">
         <div class="field is-horizontal">
           <div class="field-label">
-            <label class="label">Filtrer les animaux:</label>
+            <label class="label">Filter animals:</label>
           </div>
           <div class="field-body">
             <div class="field is-narrow">
@@ -35,8 +35,8 @@
               <i v-if="ascendingOrder" class="fa-solid fa-arrow-up-a-z"></i>
               <i v-else class="fa-solid fa-arrow-down-a-z"></i>
             </span>
-            <span v-if="ascendingOrder">Trier Z-A</span>
-            <span v-else>Trier A-Z</span>
+            <span v-if="ascendingOrder">Sort Z-A</span>
+            <span v-else>Sort A-Z</span>
           </button>
         </div>
       </form>

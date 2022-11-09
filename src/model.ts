@@ -6,3 +6,5 @@ export interface AnimalInterface {
     'name-EUen': string
   }
 }
+
+export type AnimalType = 'fish' | 'sea' | 'bugs'

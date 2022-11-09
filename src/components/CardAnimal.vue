@@ -1,6 +1,9 @@
 <template>
   <RouterLink
-    :to="{ name: 'animal_details', params: { id: animal.id } }"
+    :to="{
+      name: 'animal_details',
+      params: { id: animal.id, type: animalType },
+    }"
     class="card animal-item"
   >
     <div class="card-content">
@@ -15,7 +18,7 @@
         </div>
         <div class="media-right">
           <div class="has-text-right">
-            <AnimalType :animal="animal" />
+            <AnimalType :animal-type="animalType" />
           </div>
         </div>
       </div>
@@ -30,14 +33,18 @@
 <script setup lang="ts">
 import AnimalType from '@/components/AnimalType.vue'
 import type { AnimalInterface } from '@/model'
+import { resolveAnimalType } from '@/utils'
 import type { PropType } from 'vue'
+import { computed } from 'vue'
 
-defineProps({
+const props = defineProps({
   animal: {
     type: Object as PropType<AnimalInterface>,
     required: true,
   },
 })
+
+const animalType = computed(() => resolveAnimalType(props.animal))
 </script>
 
 <style>

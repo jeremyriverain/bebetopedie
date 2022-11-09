@@ -1,20 +1,19 @@
 <template>
-  <span v-if="isBug" class="tag is-bug">Bug</span>
-  <span v-else-if="isFish" class="tag is-fish">Fish</span>
+  <span v-if="animalType === 'bugs'" class="tag is-bug">Bug</span>
+  <span v-else-if="animalType === 'fish'" class="tag is-fish">Fish</span>
   <span v-else class="tag is-sea">Sea creature</span>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-const props = defineProps({
-  animal: {
-    type: Object,
+import type { AnimalType } from '@/model'
+import type { PropType } from 'vue'
+
+defineProps({
+  animalType: {
+    type: String as PropType<AnimalType>,
     required: true,
   },
 })
-
-const isBug = computed(() => props.animal['icon_uri'].includes('bugs'))
-const isFish = computed(() => props.animal['icon_uri'].includes('fish'))
 </script>
 
 <style>
