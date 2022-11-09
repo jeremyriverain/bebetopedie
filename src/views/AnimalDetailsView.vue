@@ -52,15 +52,7 @@ const props = defineProps({
 })
 
 const animal = computed(() => {
-  const key = Object.keys(store[props.type]).find(
-    (key) => store[props.type][key].id.toString() === props.id
-  )
-
-  if (!key) {
-    return null
-  }
-
-  return store[props.type][key]
+  return store[props.type].find((a) => a.id.toString() === props.id)
 })
 </script>
 
