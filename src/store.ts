@@ -1,5 +1,10 @@
 import { defineStore } from 'pinia'
-import type { AnimalInterface, AnimalType, SearchAnimalsParams } from '@/model'
+import type {
+  AnimalInterface,
+  AnimalType,
+  Hemisphere,
+  SearchAnimalsParams,
+} from '@/model'
 import { sortAnimals } from '@/utils'
 
 export const useStore = defineStore('main', {
@@ -11,8 +16,10 @@ export const useStore = defineStore('main', {
       isFetching: true,
       ascendingOrder: true,
       animalTypesSelected: ['bugs', 'fish', 'sea'],
+      currentHemisphere: 'northern',
     } as Record<AnimalType, AnimalInterface[]> & {
       isFetching: boolean
+      currentHemisphere: Hemisphere
     } & SearchAnimalsParams
   },
   getters: {

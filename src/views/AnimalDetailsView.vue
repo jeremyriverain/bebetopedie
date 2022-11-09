@@ -16,27 +16,29 @@
           </figure>
         </div>
         <div class="media-content">
-          <p class="title is-4">{{ animal.name['name-EUen'] }}</p>
-        </div>
-        <div class="media-right">
-          <div class="has-text-right">
-            <AnimalType :animal-type="type" />
-          </div>
+          <p class="title">
+            {{ animal.name['name-EUen'] }}
+            <AnimalType class="ml-3" :animal-type="type" />
+          </p>
         </div>
       </div>
 
       <div class="content">
         {{ animal['museum-phrase'] }}
       </div>
+
+      <AnimalAvailability :animal="animal" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import type { PropType } from 'vue'
-import type { AnimalInterface, AnimalType as AnimalTypeEnum } from '@/model'
-import AnimalType from '@/components/AnimalType.vue'
 import { useRouter } from 'vue-router'
+import type { AnimalInterface, AnimalType as AnimalTypeEnum } from '@/model'
+
+import AnimalType from '@/components/AnimalType.vue'
+import AnimalAvailability from '@/components/AnimalAvailability.vue'
 
 const props = defineProps({
   animal: {

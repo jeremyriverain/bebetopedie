@@ -5,6 +5,10 @@ export interface AnimalInterface {
   name: {
     'name-EUen': string
   }
+  availability: {
+    'month-array-northern': number[]
+    'month-array-southern': number[]
+  }
 }
 
 export type AnimalType = 'fish' | 'sea' | 'bugs'
@@ -13,3 +17,5 @@ export interface SearchAnimalsParams {
   ascendingOrder: boolean
   animalTypesSelected: AnimalType[]
 }
+
+export type Hemisphere = 'northern' | 'southern'
