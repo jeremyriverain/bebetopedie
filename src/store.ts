@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import type { AnimalInterface, AnimalType } from '@/model'
+import type { AnimalInterface, AnimalType, SearchAnimalsParams } from '@/model'
 
 export const useStore = defineStore('main', {
   state() {
@@ -8,9 +8,39 @@ export const useStore = defineStore('main', {
       fish: {},
       sea: {},
       isFetching: true,
+      ascendingOrder: true,
+      animalTypesSelected: ['bugs', 'fish', 'sea'],
     } as Record<AnimalType, Record<string, AnimalInterface>> & {
       isFetching: boolean
-    }
+    } & SearchAnimalsParams
+  },
+  getters: {
+    selectedAnimals(): Record<string, AnimalInterface> {
+      return {
+        ...(this.animalTypesSelected.includes('bugs') ? this.bugs : {}),
+        ...(this.animalTypesSelected.includes('fish') ? this.fish : {}),
+        ...(this.animalTypesSelected.includes('sea') ? this.sea : {}),
+      }
+    },
+    sortedAnimals(): Record<string, AnimalInterface> {
+      const sortedKeys = Object.keys(this.selectedAnimals).sort()
+      const selectedAnimals = this.selectedAnimals
+
+      if (!this.ascendingOrder) {
+        sortedKeys.reverse()
+      }
+      return sortedKeys.reduce<Record<string, AnimalInterface>>(function (
+        acc,
+        key
+      ) {
+        acc[key] = selectedAnimals[key]
+        return acc
+      },
+      {})
+    },
+    hasResult() {
+      return Object.keys(this.sortedAnimals).length > 0
+    },
   },
   actions: {
     async fetchAnimals() {

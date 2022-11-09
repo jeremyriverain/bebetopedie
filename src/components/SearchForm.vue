@@ -14,7 +14,7 @@
                   Sea creatures
                 </label>
                 <label class="checkbox ml-3">
-                  <input type="checkbox" v-model="types" value="bug" />
+                  <input type="checkbox" v-model="types" value="bugs" />
                   Bugs
                 </label>
                 <label class="checkbox ml-3">
@@ -29,7 +29,7 @@
         <div class="has-text-right ml-3">
           <button
             class="button"
-            @click.prevent="$emit('update:ascendingOrder', !ascendingOrder)"
+            @click.prevent="ascendingOrder = !ascendingOrder"
           >
             <span class="icon">
               <i v-if="ascendingOrder" class="fa-solid fa-arrow-up-a-z"></i>
@@ -45,25 +45,28 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import type { AnimalType } from '@/model';
+import { useStore } from '@/store'
+import { computed } from 'vue'
 
-const props = defineProps({
-  ascendingOrder: {
-    type: Boolean,
-    required: true,
+const store = useStore()
+
+const ascendingOrder = computed({
+  get() {
+    return store.ascendingOrder
   },
-  animalTypes: {
-    type: Array,
-    required: true,
+  set(newValue: boolean) {
+    store.ascendingOrder = newValue
   },
 })
 
-const emits = defineEmits(['update:ascendingOrder', 'update:animalTypes'])
-
-const types = ref(props.animalTypes)
-
-watch(types, () => {
-  emits('update:animalTypes', types.value)
+const types = computed({
+  get() {
+    return store.animalTypesSelected
+  },
+  set(newValue: AnimalType[]) {
+    store.animalTypesSelected = newValue
+  }
 })
 </script>
 
