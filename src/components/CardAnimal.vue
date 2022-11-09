@@ -47,7 +47,10 @@ const props = defineProps({
 const animalType = computed(() => resolveAnimalType(props.animal))
 </script>
 
-<style>
+<style scoped>
+.animal-item {
+  display: block;
+}
 .animal-item .media {
   align-items: center;
 }
