@@ -6,6 +6,6 @@ import { createPinia } from 'pinia'
 import './assets/main.css'
 
 const app = createApp(App)
-app.use(router).use(createPinia())
+app.use(createPinia()).use(router)
 
 app.mount('#app')

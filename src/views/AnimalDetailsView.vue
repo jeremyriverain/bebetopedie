@@ -33,27 +33,25 @@
 </template>
 
 <script setup lang="ts">
-import { computed, type PropType } from 'vue'
-import type { AnimalType as AnimalTypeEnum } from '@/model'
+import type { PropType } from 'vue'
+import type { AnimalInterface, AnimalType as AnimalTypeEnum } from '@/model'
 import AnimalType from '@/components/AnimalType.vue'
-import { useStore } from '@/store'
-
-const store = useStore()
+import { useRouter } from 'vue-router'
 
 const props = defineProps({
+  animal: {
+    type: Object as PropType<AnimalInterface>,
+    required: false,
+  },
   type: {
     type: String as PropType<AnimalTypeEnum>,
-    required: true,
-  },
-  id: {
-    type: String,
-    required: true,
   },
 })
 
-const animal = computed(() => {
-  return store[props.type].find((a) => a.id.toString() === props.id)
-})
+if (!props.animal) {
+  const router = useRouter()
+  router.push('/')
+}
 </script>
 
 <style scoped>
