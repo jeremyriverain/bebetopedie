@@ -45,6 +45,7 @@ const props = defineProps({
   },
   type: {
     type: String as PropType<AnimalTypeEnum>,
+    required: true,
   },
 })
 
