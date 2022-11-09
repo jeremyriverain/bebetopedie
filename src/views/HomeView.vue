@@ -10,9 +10,7 @@
       />
     </div>
     <article class="message is-dark mx-2" v-else-if="!isFetching">
-      <div class="message-body">
-        Aucun résultat ne correspond à votre recherche
-      </div>
+      <div class="message-body">No animals found</div>
     </article>
   </div>
 </template>
