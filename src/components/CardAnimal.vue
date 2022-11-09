@@ -1,5 +1,8 @@
 <template>
-  <div class="card animal-item">
+  <RouterLink
+    :to="{ name: 'animal_details', params: { id: animal.id } }"
+    class="card animal-item"
+  >
     <div class="card-content">
       <div class="media">
         <div class="media-left">
@@ -21,7 +24,7 @@
         {{ animal['museum-phrase'] }}
       </div>
     </div>
-  </div>
+  </RouterLink>
 </template>
 
 <script setup lang="ts">

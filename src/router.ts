@@ -9,6 +9,7 @@ export const router = createRouter({
       path: '/:id',
       component: () => import('@/views/AnimalDetailsView.vue'),
       props: true,
+      name: 'animal_details',
     },
   ],
 })
