@@ -16,6 +16,7 @@ export const useStore = defineStore('main', {
       isFetching: true,
       ascendingOrder: true,
       animalTypesSelected: ['bugs', 'fish', 'sea'],
+      searchTerm: '',
       currentHemisphere: 'northern',
     } as Record<AnimalType, AnimalInterface[]> & {
       isFetching: boolean
@@ -30,11 +31,22 @@ export const useStore = defineStore('main', {
         ...(this.animalTypesSelected.includes('sea') ? this.sea : []),
       ]
     },
+    searchedAnimals(): AnimalInterface[] {
+      if (!this.searchTerm || this.searchTerm.length === 0) {
+        return this.selectedAnimals
+      }
+
+      return this.selectedAnimals.filter((a) =>
+        a.name['name-EUen']
+          .toLowerCase()
+          .includes(this.searchTerm.toLowerCase())
+      )
+    },
     sortedAnimals(): AnimalInterface[] {
-      return sortAnimals(this.selectedAnimals, this.ascendingOrder)
+      return sortAnimals(this.searchedAnimals, this.ascendingOrder)
     },
     reversedSortedAnimals(): AnimalInterface[] {
-      return sortAnimals(this.selectedAnimals, this.ascendingOrder)
+      return sortAnimals(this.searchedAnimals, this.ascendingOrder)
     },
     hasResult() {
       return Object.keys(this.sortedAnimals).length > 0

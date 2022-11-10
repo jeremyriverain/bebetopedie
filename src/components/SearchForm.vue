@@ -1,43 +1,61 @@
 <template>
   <div class="card">
     <div class="card-content">
-      <form class="animal-form">
-        <div class="field is-horizontal">
-          <div class="field-label">
-            <label class="label">Filter animals:</label>
-          </div>
-          <div class="field-body">
-            <div class="field is-narrow">
-              <div class="control">
-                <label class="checkbox ml-3">
-                  <input type="checkbox" v-model="types" value="sea" />
-                  Sea creatures
-                </label>
-                <label class="checkbox ml-3">
-                  <input type="checkbox" v-model="types" value="bugs" />
-                  Bugs
-                </label>
-                <label class="checkbox ml-3">
-                  <input type="checkbox" v-model="types" value="fish" />
-                  Fishes
-                </label>
+      <form>
+        <div class="animal-form">
+          <div class="field is-horizontal">
+            <div class="field-label">
+              <label class="label">Filter animals:</label>
+            </div>
+            <div class="field-body">
+              <div class="field is-narrow">
+                <div class="control">
+                  <label class="checkbox ml-3">
+                    <input type="checkbox" v-model="types" value="sea" />
+                    Sea creatures
+                  </label>
+                  <label class="checkbox ml-3">
+                    <input type="checkbox" v-model="types" value="bugs" />
+                    Bugs
+                  </label>
+                  <label class="checkbox ml-3">
+                    <input type="checkbox" v-model="types" value="fish" />
+                    Fishes
+                  </label>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-
-        <div class="has-text-right ml-3">
-          <button
-            class="button"
-            @click.prevent="ascendingOrder = !ascendingOrder"
-          >
-            <span class="icon">
-              <i v-if="ascendingOrder" class="fa-solid fa-arrow-up-a-z"></i>
-              <i v-else class="fa-solid fa-arrow-down-a-z"></i>
-            </span>
-            <span v-if="ascendingOrder">Sort Z-A</span>
-            <span v-else>Sort A-Z</span>
-          </button>
+          <div class="has-text-right ml-3">
+            <button
+              class="button"
+              @click.prevent="ascendingOrder = !ascendingOrder"
+            >
+              <span class="icon">
+                <i v-if="ascendingOrder" class="fa-solid fa-arrow-up-a-z"></i>
+                <i v-else class="fa-solid fa-arrow-down-a-z"></i>
+              </span>
+              <span v-if="ascendingOrder">Sort Z-A</span>
+              <span v-else>Sort A-Z</span>
+            </button>
+          </div>
+          <div class="field is-horizontal">
+            <div class="field-label is-normal">
+              <label class="label" for="search-name">Search</label>
+            </div>
+            <div class="field-body">
+              <div class="field">
+                <p class="control">
+                  <input
+                    class="input"
+                    placeholder="Name"
+                    id="search-name"
+                    v-model="term"
+                  />
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </form>
     </div>
@@ -45,7 +63,7 @@
 </template>
 
 <script setup lang="ts">
-import type { AnimalType } from '@/model';
+import type { AnimalType } from '@/model'
 import { useStore } from '@/store'
 import { computed } from 'vue'
 
@@ -66,7 +84,16 @@ const types = computed({
   },
   set(newValue: AnimalType[]) {
     store.animalTypesSelected = newValue
-  }
+  },
+})
+
+const term = computed({
+  get() {
+    return store.searchTerm
+  },
+  set(newValue: string) {
+    store.searchTerm = newValue
+  },
 })
 </script>
 
@@ -75,5 +102,9 @@ const types = computed({
   display: grid;
   grid-template-columns: auto auto;
   align-items: center;
+}
+
+.input {
+  max-width: 300px;
 }
 </style>

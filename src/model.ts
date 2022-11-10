@@ -16,6 +16,7 @@ export type AnimalType = 'fish' | 'sea' | 'bugs'
 export interface SearchAnimalsParams {
   ascendingOrder: boolean
   animalTypesSelected: AnimalType[]
+  searchTerm: string
 }
 
 export type Hemisphere = 'northern' | 'southern'
