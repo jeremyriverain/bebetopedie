@@ -23,3 +23,16 @@ export function sortAnimals(
     return ascendingOrder ? -1 : 1
   })
 }
+
+export function isAvailable(
+  monthAvailability: number[],
+  timeAvailability: number[]
+): boolean {
+  const now = new Date()
+  const monthNumber = now.getMonth() + 1
+  const hourNumber = now.getHours()
+  return (
+    monthAvailability.includes(monthNumber) &&
+    timeAvailability.includes(hourNumber)
+  )
+}

@@ -56,6 +56,12 @@
               </div>
             </div>
           </div>
+          <div class="field">
+            <label class="checkbox">
+              <input type="checkbox" v-model="onlyAvailable" />
+              Only show available animals
+            </label>
+          </div>
         </div>
       </form>
     </div>
@@ -93,6 +99,15 @@ const term = computed({
   },
   set(newValue: string) {
     store.searchTerm = newValue
+  },
+})
+
+const onlyAvailable = computed({
+  get() {
+    return store.onlyAvailableAnimals
+  },
+  set(newValue) {
+    store.onlyAvailableAnimals = newValue
   },
 })
 </script>

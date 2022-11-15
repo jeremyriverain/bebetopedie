@@ -9,6 +9,7 @@ export interface AnimalInterface {
     'month-array-northern': number[]
     'month-array-southern': number[]
     time: `${string} - ${string}` | ''
+    'time-array': number[]
   }
 }
 
@@ -18,6 +19,7 @@ export interface SearchAnimalsParams {
   ascendingOrder: boolean
   animalTypesSelected: AnimalType[]
   searchTerm: string
+  onlyAvailableAnimals: boolean
 }
 
 export type Hemisphere = 'northern' | 'southern'

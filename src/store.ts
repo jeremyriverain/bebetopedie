@@ -5,7 +5,7 @@ import type {
   Hemisphere,
   SearchAnimalsParams,
 } from '@/model'
-import { sortAnimals } from '@/utils'
+import { isAvailable, sortAnimals } from '@/utils'
 
 export const useStore = defineStore('main', {
   state() {
@@ -18,12 +18,29 @@ export const useStore = defineStore('main', {
       animalTypesSelected: ['bugs', 'fish', 'sea'],
       searchTerm: '',
       currentHemisphere: 'northern',
+      onlyAvailableAnimals: false,
     } as Record<AnimalType, AnimalInterface[]> & {
       isFetching: boolean
       currentHemisphere: Hemisphere
     } & SearchAnimalsParams
   },
   getters: {
+    allAnimals(): AnimalInterface[] {
+      return [...this.bugs, ...this.fish, ...this.sea]
+    },
+    availableAnimalsMap(): Record<string, boolean> {
+      return this.allAnimals.reduce((a: any, b: AnimalInterface) => {
+        return {
+          ...a,
+          [b.name['name-EUen']]: isAvailable(
+            this.currentHemisphere === 'northern'
+              ? b.availability['month-array-northern']
+              : b.availability['month-array-southern'],
+            b.availability['time-array']
+          ),
+        }
+      }, {})
+    },
     selectedAnimals(): AnimalInterface[] {
       return [
         ...(this.animalTypesSelected.includes('bugs') ? this.bugs : []),
@@ -42,11 +59,26 @@ export const useStore = defineStore('main', {
           .includes(this.searchTerm.toLowerCase())
       )
     },
+    availaibleAnimals(): AnimalInterface[] {
+      return this.searchedAnimals.filter(
+        (a) => this.availableAnimalsMap[a.name['name-EUen']] === true
+      )
+    },
     sortedAnimals(): AnimalInterface[] {
-      return sortAnimals(this.searchedAnimals, this.ascendingOrder)
+      return sortAnimals(
+        this.onlyAvailableAnimals
+          ? this.availaibleAnimals
+          : this.searchedAnimals,
+        this.ascendingOrder
+      )
     },
     reversedSortedAnimals(): AnimalInterface[] {
-      return sortAnimals(this.searchedAnimals, this.ascendingOrder)
+      return sortAnimals(
+        this.onlyAvailableAnimals
+          ? this.availaibleAnimals
+          : this.searchedAnimals,
+        this.ascendingOrder
+      )
     },
     hasResult() {
       return Object.keys(this.sortedAnimals).length > 0
