@@ -1,33 +1,35 @@
 <template>
-  <div class="card animal-item mx-2 my-2" v-if="animal">
-    <div class="card-content">
-      <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-          <li><RouterLink to="/">Homepage</RouterLink></li>
-          <li class="is-active">
-            <a href="#" aria-current="page">{{ animal.name['name-EUen'] }}</a>
-          </li>
-        </ul>
-      </nav>
-      <div class="media">
-        <div class="media-left">
-          <figure class="image is-64x64">
-            <img :src="animal.icon_uri" :alt="animal.name['name-EUen']" />
-          </figure>
+  <div class="py-2" v-if="animal">
+    <div class="card animal-item mx-2 my-2">
+      <div class="card-content">
+        <nav class="breadcrumb" aria-label="breadcrumbs">
+          <ul>
+            <li><RouterLink to="/">Homepage</RouterLink></li>
+            <li class="is-active">
+              <a href="#" aria-current="page">{{ animal.name['name-EUen'] }}</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="media">
+          <div class="media-left">
+            <figure class="image is-64x64">
+              <img :src="animal.icon_uri" :alt="animal.name['name-EUen']" />
+            </figure>
+          </div>
+          <div class="media-content">
+            <p class="title">
+              {{ animal.name['name-EUen'] }}
+              <AnimalType class="ml-3" :animal-type="type" />
+            </p>
+          </div>
         </div>
-        <div class="media-content">
-          <p class="title">
-            {{ animal.name['name-EUen'] }}
-            <AnimalType class="ml-3" :animal-type="type" />
-          </p>
+
+        <div class="content">
+          {{ animal['museum-phrase'] }}
         </div>
-      </div>
 
-      <div class="content">
-        {{ animal['museum-phrase'] }}
+        <AnimalAvailability :animal="animal" />
       </div>
-
-      <AnimalAvailability :animal="animal" />
     </div>
   </div>
 </template>
