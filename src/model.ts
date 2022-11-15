@@ -8,6 +8,7 @@ export interface AnimalInterface {
   availability: {
     'month-array-northern': number[]
     'month-array-southern': number[]
+    time: `${string} - ${string}` | ''
   }
 }
 

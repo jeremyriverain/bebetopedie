@@ -1,5 +1,7 @@
 <template>
-  <h3 class="title is-6">Availability</h3>
+  <h3 class="title is-6">
+    <i class="fa-solid fa-calendar-days"></i> Availability
+  </h3>
   <div class="control subtitle mb-2">
     <label
       class="radio"
@@ -55,6 +57,7 @@
       </table>
     </table>
   </div>
+  <div><i class="fa-regular fa-clock"></i> {{ timeAvailabilityLabel }}</div>
 </template>
 
 <script lang="ts" setup>
@@ -113,4 +116,12 @@ const currentAvailability = computed(() =>
     ? props.animal.availability['month-array-northern']
     : props.animal.availability['month-array-southern']
 )
+
+const timeAvailabilityLabel = computed(() => {
+  if (props.animal.availability.time.length === 0) {
+    return 'These animals can be caught all day ! No time constraints'
+  }
+  const [from = '', to = ''] = props.animal.availability.time.split(' - ')
+  return `These animals can be caught from ${from} to ${to}.`
+})
 </script>
