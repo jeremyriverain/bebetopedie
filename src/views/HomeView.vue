@@ -7,7 +7,6 @@
         data-key="icon_uri"
         :data-sources="sortedAnimals"
         :data-component="CardAnimal"
-        :pool-buffer="30"
       />
     </div>
     <article class="message is-dark mx-3 my-2" v-else-if="!isFetching">
