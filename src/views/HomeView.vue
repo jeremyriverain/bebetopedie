@@ -39,4 +39,8 @@ const hasResult = computed(() => store.hasResult)
     grid-template-columns: auto auto;
   }
 }
+
+.animal-container ::-webkit-scrollbar {
+  display: none;
+}
 </style>
