@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div>
     <TheHeaderImage class="is-hidden-mobile" />
     <RouterView />
   </div>

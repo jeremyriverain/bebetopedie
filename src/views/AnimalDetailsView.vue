@@ -1,5 +1,5 @@
 <template>
-  <div class="py-2" v-if="animal">
+  <div class="py-2 animal-container" v-if="animal">
     <div class="card animal-item mx-2 my-2">
       <div class="card-content">
         <nav class="breadcrumb" aria-label="breadcrumbs">
@@ -60,6 +60,11 @@ if (!props.animal) {
 </script>
 
 <style scoped>
+.animal-container {
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 768px;
+}
 .animal-item .media {
   align-items: center;
 }

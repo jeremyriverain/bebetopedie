@@ -1,18 +1,18 @@
 <template>
-  <div class="container py-2">
-    <SearchForm class="mx-2" />
-    <div class="animal-container" v-if="hasResult">
-      <VirtualList
-        style="height: 100vh; overflow-y: auto"
-        data-key="icon_uri"
-        :data-sources="sortedAnimals"
-        :data-component="CardAnimal"
-      />
-    </div>
-    <article class="message is-dark mx-3 my-2" v-else-if="!isFetching">
-      <div class="message-body">No animals found</div>
-    </article>
+  <div class="py-2 form-container">
+    <SearchForm class="mx-2 form" />
   </div>
+  <div class="animal-container" v-if="hasResult">
+    <VirtualList
+      style="height: 100vh; overflow-y: auto"
+      data-key="icon_uri"
+      :data-sources="sortedAnimals"
+      :data-component="CardAnimal"
+    />
+  </div>
+  <article class="message is-dark mx-3 my-2" v-else-if="!isFetching">
+    <div class="message-body">No animals found</div>
+  </article>
 </template>
 
 <script setup>
@@ -41,5 +41,15 @@ const hasResult = computed(() => store.hasResult)
 
 .animal-container ::-webkit-scrollbar {
   display: none;
+}
+
+.form {
+  max-width: 768px;
+  width: 100%;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
 }
 </style>
