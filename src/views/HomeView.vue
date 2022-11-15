@@ -32,13 +32,6 @@ const hasResult = computed(() => store.hasResult)
 </script>
 
 <style scoped>
-@media screen and (min-width: 768px) {
-  .animal-container {
-    display: grid;
-    grid-template-columns: auto auto;
-  }
-}
-
 .animal-container ::-webkit-scrollbar {
   display: none;
 }

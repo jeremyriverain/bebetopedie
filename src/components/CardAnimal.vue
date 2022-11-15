@@ -54,7 +54,7 @@ const animalType = computed(() => resolveAnimalType(props.source))
 
 <style scoped>
 .animal-item-container {
-  width: 100vw;
+  width: 100%;
   display: flex;
   justify-content: center;
 }
