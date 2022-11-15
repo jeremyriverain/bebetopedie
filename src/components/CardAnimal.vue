@@ -2,19 +2,19 @@
   <RouterLink
     :to="{
       name: 'animal_details',
-      params: { id: animal.id, type: animalType },
+      params: { id: source.id, type: animalType },
     }"
-    class="card animal-item"
+    class="card animal-item mx-3 my-2"
   >
     <div class="card-content">
       <div class="media">
         <div class="media-left">
           <figure class="image is-64x64">
-            <img :src="animal['icon_uri']" :alt="animal['name']['name-EUen']" />
+            <img :src="source['icon_uri']" :alt="source['name']['name-EUen']" />
           </figure>
         </div>
         <div class="media-content">
-          <p class="title is-4">{{ animal.name['name-EUen'] }}</p>
+          <p class="title is-4">{{ source.name['name-EUen'] }}</p>
         </div>
         <div class="media-right">
           <div class="has-text-right">
@@ -24,7 +24,7 @@
       </div>
 
       <div class="content">
-        {{ animal['museum-phrase'] }}
+        {{ source['museum-phrase'] }}
       </div>
     </div>
   </RouterLink>
@@ -38,13 +38,13 @@ import type { PropType } from 'vue'
 import { computed } from 'vue'
 
 const props = defineProps({
-  animal: {
+  source: {
     type: Object as PropType<AnimalInterface>,
     required: true,
   },
 })
 
-const animalType = computed(() => resolveAnimalType(props.animal))
+const animalType = computed(() => resolveAnimalType(props.source))
 </script>
 
 <style scoped>

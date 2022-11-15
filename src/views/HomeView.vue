@@ -1,15 +1,16 @@
 <template>
-  <div class="container">
-    <SearchForm class="mx-2 my-2" />
+  <div class="container py-2">
+    <SearchForm class="mx-2" />
     <div class="animal-container" v-if="hasResult">
-      <CardAnimal
-        v-for="animal in sortedAnimals"
-        :key="animal.icon_uri"
-        :animal="animal"
-        class="mx-2 my-2"
+      <VirtualList
+        style="height: 100vh; overflow-y: auto"
+        data-key="icon_uri"
+        :data-sources="sortedAnimals"
+        :data-component="CardAnimal"
+        :pool-buffer="30"
       />
     </div>
-    <article class="message is-dark mx-2" v-else-if="!isFetching">
+    <article class="message is-dark mx-3 my-2" v-else-if="!isFetching">
       <div class="message-body">No animals found</div>
     </article>
   </div>
@@ -17,6 +18,7 @@
 
 <script setup>
 import { computed } from 'vue'
+import VirtualList from 'vue3-virtual-scroll-list'
 import SearchForm from '@/components/SearchForm.vue'
 import CardAnimal from '@/components/CardAnimal.vue'
 import { useStore } from '@/store'
@@ -25,9 +27,7 @@ const store = useStore()
 
 const isFetching = computed(() => store.isFetching)
 
-const sortedAnimals = computed(() =>
-  store.ascendingOrder ? store.sortedAnimals : store.reversedSortedAnimals
-)
+const sortedAnimals = computed(() => store.sortedAnimals)
 
 const hasResult = computed(() => store.hasResult)
 </script>

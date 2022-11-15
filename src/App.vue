@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <TheHeaderImage />
+    <TheHeaderImage class="is-hidden-mobile" />
     <RouterView />
   </div>
 </template>

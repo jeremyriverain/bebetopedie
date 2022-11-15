@@ -65,20 +65,14 @@ export const useStore = defineStore('main', {
       )
     },
     sortedAnimals(): AnimalInterface[] {
-      return sortAnimals(
-        this.onlyAvailableAnimals
-          ? this.availaibleAnimals
-          : this.searchedAnimals,
-        this.ascendingOrder
-      )
-    },
-    reversedSortedAnimals(): AnimalInterface[] {
-      return sortAnimals(
-        this.onlyAvailableAnimals
-          ? this.availaibleAnimals
-          : this.searchedAnimals,
-        this.ascendingOrder
-      )
+      return [
+        ...sortAnimals(
+          this.onlyAvailableAnimals
+            ? this.availaibleAnimals
+            : this.searchedAnimals,
+          this.ascendingOrder
+        ),
+      ]
     },
     hasResult() {
       return Object.keys(this.sortedAnimals).length > 0

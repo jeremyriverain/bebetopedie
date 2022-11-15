@@ -57,7 +57,7 @@
             </div>
           </div>
           <div class="field">
-            <label class="checkbox">
+            <label class="checkbox ml-3">
               <input type="checkbox" v-model="onlyAvailable" />
               Only show available animals
             </label>
