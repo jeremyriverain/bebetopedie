@@ -21,12 +21,12 @@
                 <div class="field is-narrow">
                   <div class="control">
                     <label class="checkbox ml-3">
-                      <input type="checkbox" v-model="types" value="sea" />
-                      Sea creatures
-                    </label>
-                    <label class="checkbox ml-3">
                       <input type="checkbox" v-model="types" value="bugs" />
                       Bugs
+                    </label>
+                    <label class="checkbox ml-3">
+                      <input type="checkbox" v-model="types" value="sea" />
+                      Sea creatures
                     </label>
                     <label class="checkbox ml-3">
                       <input type="checkbox" v-model="types" value="fish" />

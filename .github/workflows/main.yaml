@@ -1,10 +1,6 @@
 name: VueJS CI
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+on: [push, workflow_dispatch]
 
 jobs:
   build:
@@ -20,9 +16,16 @@ jobs:
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
-
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm ci
-      - run: npm run lint
-      - run: npm run test:unit -- run
+      - name: install dependencies
+        run: npm ci
+      - name: lint
+        run: npm run lint
+      - name: unit test
+        run: npm run test:unit -- run
+      - name: build
+        run: npm run build
+      - name: deploy
+        if: steps.prepare.outputs.branch == 'main'
+        run: npm run deploy -- --token ${{ secrets.SURGE_TOKEN }}
