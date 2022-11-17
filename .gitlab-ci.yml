@@ -1,0 +1,29 @@
+image: node:16
+
+stages:
+  - build
+  - test
+
+install:
+  stage: build
+  script:
+    - npm ci
+  artifacts:
+    paths:
+      - node_modules
+
+lint:
+  stage: test
+  script:
+    - npm run lint
+  artifacts:
+    paths:
+      - node_modules/
+
+unit:
+  stage: test
+  script:
+    - npm run test:unit -- run
+  artifacts:
+    paths:
+      - node_modules/
