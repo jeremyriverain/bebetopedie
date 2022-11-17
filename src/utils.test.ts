@@ -64,6 +64,19 @@ describe('sortAnimals', () => {
     expect(orderedAnimals[1].name['name-EUen']).toBe('b')
     expect(orderedAnimals[2].name['name-EUen']).toBe('c')
   })
+  it('sorts in descending order', () => {
+    const unorderedAnimals = [
+      createAnimal({ name: { 'name-EUen': 'b' } }),
+      createAnimal({ name: { 'name-EUen': 'a' } }),
+      createAnimal({ name: { 'name-EUen': 'c' } }),
+    ]
+
+    const orderedAnimals = sortAnimals(unorderedAnimals, false)
+
+    expect(orderedAnimals[0].name['name-EUen']).toBe('c')
+    expect(orderedAnimals[1].name['name-EUen']).toBe('b')
+    expect(orderedAnimals[2].name['name-EUen']).toBe('a')
+  })
 })
 
 describe('isAvailable', () => {
