@@ -3,14 +3,17 @@ image: node:16
 stages:
   - build
   - test
+  - deploy
 
-install:
+build:
   stage: build
   script:
     - npm ci
+    - npm run build
   artifacts:
     paths:
       - node_modules
+      - dist
 
 lint:
   stage: test
@@ -27,3 +30,10 @@ unit:
   artifacts:
     paths:
       - node_modules/
+
+deploy:
+  stage: deploy
+  script:
+    - npm run deploy -- --token $SURGE_TOKEN
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
