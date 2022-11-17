@@ -5,15 +5,17 @@ export function resolveAnimalType(animal: AnimalInterface): AnimalType {
     return 'bugs'
   } else if (animal.icon_uri.includes('sea')) {
     return 'sea'
+  } else if (animal.icon_uri.includes('fish')) {
+    return 'fish'
   }
-  return 'fish'
+  throw new Error('this animal is neither a bug nor a fish or a sea creature.')
 }
 
 export function sortAnimals(
   animals: AnimalInterface[],
   ascendingOrder: boolean
 ): AnimalInterface[] {
-  return animals.sort(function (a, b) {
+  return [...animals].sort(function (a, b) {
     const x = a.name['name-EUen'].toLowerCase()
     const y = b.name['name-EUen'].toLowerCase()
 

@@ -10,9 +10,11 @@
       :data-component="CardAnimal"
     />
   </div>
-  <article class="message is-dark mx-3 my-2" v-else-if="!isFetching">
-    <div class="message-body">No animals found</div>
-  </article>
+  <div class="container" v-else-if="!isFetching">
+    <article class="message is-dark mx-3 my-2 not-found">
+      <div class="message-body">No animals found</div>
+    </article>
+  </div>
 </template>
 
 <script setup>
