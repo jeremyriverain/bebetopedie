@@ -5,6 +5,14 @@ stages:
   - test
   - deploy
 
+install:
+  stage: build
+  script:
+    - npm ci
+  artifacts:
+    paths:
+      - node_modules
+
 build:
   stage: build
   script:
@@ -12,24 +20,26 @@ build:
     - npm run build
   artifacts:
     paths:
-      - node_modules
       - dist
+  needs:
+    - job: install
+      artifacts: true
 
 lint:
   stage: test
   script:
     - npm run lint
-  artifacts:
-    paths:
-      - node_modules/
+  needs:
+    - job: install
+      artifacts: true
 
 unit:
   stage: test
   script:
     - npm run test:unit -- run
-  artifacts:
-    paths:
-      - node_modules/
+  needs:
+    - job: install
+      artifacts: true
 
 deploy:
   stage: deploy
@@ -37,3 +47,8 @@ deploy:
     - npm run deploy -- --token $SURGE_TOKEN
   rules:
     - if: $CI_COMMIT_BRANCH == "main"
+  needs:
+    - job: install
+      artifacts: true
+    - job: build
+      artifacts: true
