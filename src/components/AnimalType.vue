@@ -1,7 +1,7 @@
 <template>
   <span v-if="animalType === 'bugs'" class="tag is-bug">Bug</span>
   <span v-else-if="animalType === 'fish'" class="tag is-fish">Fish</span>
-  <span v-else class="tag is-sea">Sea creature</span>
+  <span v-else-if="animalType === 'sea'" class="tag is-sea">Sea creature</span>
 </template>
 
 <script setup lang="ts">

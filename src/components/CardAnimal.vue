@@ -12,7 +12,7 @@
           <div class="media-left">
             <figure class="image is-64x64">
               <img
-                :src="source['icon_uri']"
+                src="https://via.placeholder.com/64"
                 :alt="source['name']['name-EUen']"
               />
             </figure>

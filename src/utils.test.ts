@@ -1,26 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
-import type { AnimalInterface } from './model'
 import { resolveAnimalType, sortAnimals, isAvailable } from './utils'
-
-function createAnimal(animal: Partial<AnimalInterface> = {}): AnimalInterface {
-  return {
-    ...{
-      'museum-phrase': 'lorem ipsum',
-      availability: {
-        'month-array-northern': [],
-        'month-array-southern': [],
-        'time-array': [],
-        time: '8am - 10pm',
-      },
-      icon_uri: '',
-      id: 1,
-      name: {
-        'name-EUen': '',
-      },
-    },
-    ...animal,
-  }
-}
+import { createAnimal } from '@/test-utils'
 
 describe('resolveAnimalType', () => {
   it('resolves type correctly', () => {
