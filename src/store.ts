@@ -6,6 +6,9 @@ import type {
   SearchAnimalsParams,
 } from '@/model'
 import { isAvailable, sortAnimals } from '@/utils'
+import bugs from '@/data/bugs.json'
+import fishes from '@/data/fish.json'
+import seaCreatures from '@/data/sea.json'
 
 export const useStore = defineStore('main', {
   state() {
@@ -80,23 +83,30 @@ export const useStore = defineStore('main', {
   },
   actions: {
     async fetchAnimals() {
-      try {
-        const promises = [
-          fetch('https://acnhapi.com/v1/bugs').then((r) => r.json()),
-          fetch('https://acnhapi.com/v1/fish').then((r) => r.json()),
-          fetch('https://acnhapi.com/v1/sea').then((r) => r.json()),
-        ]
+      // try {
+      //   const promises = [
+      //     fetch('https://acnhapi.com/v1/bugs').then((r) => r.json()),
+      //     fetch('https://acnhapi.com/v1/fish').then((r) => r.json()),
+      //     fetch('https://acnhapi.com/v1/sea').then((r) => r.json()),
+      //   ]
 
-        const [bugsResponse, fishResponse, seaCreaturesResponse] =
-          await Promise.all(promises)
-        this.bugs = Object.keys(bugsResponse).map((key) => bugsResponse[key])
-        this.fish = Object.keys(fishResponse).map((key) => fishResponse[key])
-        this.sea = Object.keys(seaCreaturesResponse).map(
-          (key) => seaCreaturesResponse[key]
-        )
-      } finally {
-        this.isFetching = false
-      }
+      //   const [bugsResponse, fishResponse, seaCreaturesResponse] =
+      //     await Promise.all(promises)
+      //   this.bugs = Object.keys(bugsResponse).map((key) => bugsResponse[key])
+      //   this.fish = Object.keys(fishResponse).map((key) => fishResponse[key])
+      //   this.sea = Object.keys(seaCreaturesResponse).map(
+      //     (key) => seaCreaturesResponse[key]
+      //   )
+      // } finally {
+      this.isFetching = false
+      // }
+
+      this.bugs = Object.keys(bugs).map((key) => (bugs as any)[key])
+      this.fish = Object.keys(fishes).map((key) => (fishes as any)[key])
+      this.sea = Object.keys(seaCreatures).map(
+        (key) => (seaCreatures as any)[key]
+      )
+      this.isFetching = false
     },
   },
 })
