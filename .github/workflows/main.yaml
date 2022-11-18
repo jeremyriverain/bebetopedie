@@ -28,6 +28,10 @@ jobs:
         run: npm run test:unit -- run
       - name: build
         run: npm run build
+      - name: e2e
+        uses: cypress-io/github-action@v4.2.0
+        with:
+          command: npm run test:e2e
       - name: deploy
         if: steps.prepare.outputs.branch == 'main'
         run: npm run deploy -- --token ${{ secrets.SURGE_TOKEN }}

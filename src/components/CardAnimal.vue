@@ -1,5 +1,5 @@
 <template>
-  <div class="animal-item-container my-2">
+  <div class="animal-item-container my-2" data-cy="card-animal">
     <RouterLink
       :to="{
         name: 'animal_details',
