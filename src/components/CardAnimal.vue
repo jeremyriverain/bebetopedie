@@ -18,7 +18,9 @@
             </figure>
           </div>
           <div class="media-content">
-            <p class="title is-4">{{ source.name['name-EUen'] }}</p>
+            <p class="title is-4" data-cy="card-animal-name">
+              {{ source.name['name-EUen'] }}
+            </p>
           </div>
           <div class="media-right">
             <div class="has-text-right">
@@ -27,7 +29,7 @@
           </div>
         </div>
 
-        <div class="content">
+        <div class="content" data-cy="card-animal-description">
           {{ source['museum-phrase'] }}
         </div>
       </div>

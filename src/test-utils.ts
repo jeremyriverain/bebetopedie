@@ -9,13 +9,13 @@ export function createAnimal(
       availability: {
         'month-array-northern': [],
         'month-array-southern': [],
-        'time-array': [],
-        time: '8am - 10pm',
+        'time-array': [8, 9, 10],
+        time: '8am - 10am',
       },
-      icon_uri: '',
+      icon_uri: 'https://acnhapi.com/v1/icons/bugs/1',
       id: 1,
       name: {
-        'name-EUen': '',
+        'name-EUen': 'yellow butterfly',
       },
     },
     ...animal,

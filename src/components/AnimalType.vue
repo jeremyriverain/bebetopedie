@@ -1,12 +1,25 @@
 <template>
-  <span v-if="animalType === 'bugs'" class="tag is-bug">Bug</span>
-  <span v-else-if="animalType === 'fish'" class="tag is-fish">Fish</span>
-  <span v-else-if="animalType === 'sea'" class="tag is-sea">Sea creature</span>
+  <span v-if="animalType === 'bugs'" class="tag is-bug" :data-cy="cySelector"
+    >Bug</span
+  >
+  <span
+    v-else-if="animalType === 'fish'"
+    class="tag is-fish"
+    :data-cy="cySelector"
+    >Fish</span
+  >
+  <span
+    v-else-if="animalType === 'sea'"
+    class="tag is-sea"
+    :data-cy="cySelector"
+    >Sea creature</span
+  >
 </template>
 
 <script setup lang="ts">
 import type { AnimalType } from '@/model'
 import type { PropType } from 'vue'
+import { ref } from 'vue'
 
 defineProps({
   animalType: {
@@ -14,6 +27,8 @@ defineProps({
     required: true,
   },
 })
+
+const cySelector = ref('animal-type')
 </script>
 
 <style>
