@@ -18,43 +18,41 @@
     </label>
   </div>
   <div class="table-container">
-    <table class="table">
-      <table class="table is-bordered">
-        <tbody>
-          <tr>
-            <td v-for="(month, index) in months.slice(0, 6)" :key="month">
-              <div class="icon-text">
-                <span
-                  class="icon has-text-success"
-                  v-if="currentAvailability.includes(index + 1)"
-                >
-                  <i class="fas fa-check-square"></i>
-                </span>
-                <span class="icon has-text-danger" v-else>
-                  <i class="fas fa-close"></i>
-                </span>
-                <span>{{ month }}</span>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td v-for="(month, index) in months.slice(-6)" :key="month">
-              <div class="icon-text">
-                <span
-                  class="icon has-text-success"
-                  v-if="currentAvailability.includes(index + 7)"
-                >
-                  <i class="fas fa-check-square"></i>
-                </span>
-                <span class="icon has-text-danger" v-else>
-                  <i class="fas fa-close"></i>
-                </span>
-                <span>{{ month }}</span>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <table class="table is-bordered">
+      <tbody>
+        <tr>
+          <td v-for="(month, index) in months.slice(0, 6)" :key="month">
+            <div class="icon-text">
+              <span
+                class="icon has-text-success"
+                v-if="currentAvailability.includes(index + 1)"
+              >
+                <i class="fas fa-check-square"></i>
+              </span>
+              <span class="icon has-text-danger" v-else>
+                <i class="fas fa-close"></i>
+              </span>
+              <span>{{ month }}</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td v-for="(month, index) in months.slice(-6)" :key="month">
+            <div class="icon-text">
+              <span
+                class="icon has-text-success"
+                v-if="currentAvailability.includes(index + 7)"
+              >
+                <i class="fas fa-check-square"></i>
+              </span>
+              <span class="icon has-text-danger" v-else>
+                <i class="fas fa-close"></i>
+              </span>
+              <span>{{ month }}</span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
     </table>
   </div>
   <div><i class="fa-regular fa-clock"></i> {{ timeAvailabilityLabel }}</div>
