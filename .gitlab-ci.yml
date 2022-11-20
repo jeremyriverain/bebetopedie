@@ -33,11 +33,41 @@ lint:
     - job: install
       artifacts: true
 
-unit:
+unit_tests:
   stage: test
   script:
     - npm run test:unit -- run
   needs:
+    - job: install
+      artifacts: true
+
+.cypress:
+  image: cypress/base:16
+  stage: test
+  artifacts:
+    when: always
+    paths:
+      - cypress/videos/**/*.mp4
+      - cypress/screenshots/**/*.png
+    expire_in: 1 day
+
+component_tests:
+  extends: .cypress
+  script:
+    - npx cypress install
+    - npm run test:component
+  needs:
+    - job: install
+      artifacts: true
+
+e2e_tests:
+  extends: .cypress
+  script:
+    - npx cypress install
+    - npm run test:e2e
+  needs:
+    - job: build
+      artifacts: true
     - job: install
       artifacts: true
 
@@ -47,8 +77,3 @@ deploy:
     - npm run deploy -- --token $SURGE_TOKEN
   rules:
     - if: $CI_COMMIT_BRANCH == "main"
-  needs:
-    - job: install
-      artifacts: true
-    - job: build
-      artifacts: true
