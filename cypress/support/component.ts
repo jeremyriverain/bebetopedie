@@ -20,13 +20,17 @@ import './commands'
 // require('./commands')
 
 import { mount } from 'cypress/vue'
-import { createPinia } from 'pinia'
 import { router } from './../../src/router'
+import { createPinia, setActivePinia } from 'pinia'
+
+const piniaInstance = createPinia()
+
+setActivePinia(piniaInstance)
 
 Cypress.Commands.add('mount', (component, options = {}) => {
   options.global = options.global || {}
   options.global.plugins = options.global.plugins || []
-  options.global.plugins.push(createPinia())
+  options.global.plugins.push(piniaInstance)
   options.global.plugins.push(router)
 
   return mount(component, options)

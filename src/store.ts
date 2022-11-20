@@ -10,22 +10,28 @@ import bugs from '@/data/bugs.json'
 import fishes from '@/data/fish.json'
 import seaCreatures from '@/data/sea.json'
 
+export const initialState = () => {
+  return {
+    bugs: [],
+    fish: [],
+    sea: [],
+    isFetching: true,
+    ascendingOrder: true,
+    animalTypesSelected: ['bugs', 'fish', 'sea'],
+    searchTerm: '',
+    currentHemisphere: 'northern',
+    onlyAvailableAnimals: false,
+  }
+}
+
+export type MainStoreState = Record<AnimalType, AnimalInterface[]> & {
+  isFetching: boolean
+  currentHemisphere: Hemisphere
+} & SearchAnimalsParams
+
 export const useStore = defineStore('main', {
   state() {
-    return {
-      bugs: [],
-      fish: [],
-      sea: [],
-      isFetching: true,
-      ascendingOrder: true,
-      animalTypesSelected: ['bugs', 'fish', 'sea'],
-      searchTerm: '',
-      currentHemisphere: 'northern',
-      onlyAvailableAnimals: false,
-    } as Record<AnimalType, AnimalInterface[]> & {
-      isFetching: boolean
-      currentHemisphere: Hemisphere
-    } & SearchAnimalsParams
+    return initialState() as MainStoreState
   },
   getters: {
     allAnimals(): AnimalInterface[] {
@@ -98,7 +104,7 @@ export const useStore = defineStore('main', {
       //     (key) => seaCreaturesResponse[key]
       //   )
       // } finally {
-      this.isFetching = false
+      // this.isFetching = false
       // }
 
       this.bugs = Object.keys(bugs).map((key) => (bugs as any)[key])

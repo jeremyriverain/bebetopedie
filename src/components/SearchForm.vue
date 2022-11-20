@@ -1,6 +1,10 @@
 <template>
   <div>
-    <div class="has-text-right mb-2" v-if="showButton">
+    <div
+      class="has-text-right mb-2"
+      v-if="showButton"
+      data-cy="search-form-toggle-button"
+    >
       <button class="button" @click="showForm = !showForm">
         <span class="icon is-small">
           <i class="fa-solid" :class="showForm ? 'fa-close' : 'fa-filter'"></i>
@@ -21,15 +25,30 @@
                 <div class="field is-narrow">
                   <div class="control">
                     <label class="checkbox ml-3">
-                      <input type="checkbox" v-model="types" value="bugs" />
+                      <input
+                        type="checkbox"
+                        v-model="types"
+                        value="bugs"
+                        data-cy="search-form-types"
+                      />
                       Bugs
                     </label>
                     <label class="checkbox ml-3">
-                      <input type="checkbox" v-model="types" value="sea" />
+                      <input
+                        type="checkbox"
+                        v-model="types"
+                        value="sea"
+                        data-cy="search-form-types"
+                      />
                       Sea creatures
                     </label>
                     <label class="checkbox ml-3">
-                      <input type="checkbox" v-model="types" value="fish" />
+                      <input
+                        type="checkbox"
+                        v-model="types"
+                        value="fish"
+                        data-cy="search-form-types"
+                      />
                       Fishes
                     </label>
                   </div>
@@ -60,6 +79,7 @@
                       class="input"
                       placeholder="Name"
                       id="search-name"
+                      data-cy="search-form-term"
                       v-model="term"
                     />
                   </p>

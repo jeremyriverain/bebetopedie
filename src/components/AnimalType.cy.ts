@@ -1,5 +1,3 @@
-/// <reference types="cypress" />
-
 import AnimalType from './AnimalType.vue'
 
 describe('AnimalType', () => {
