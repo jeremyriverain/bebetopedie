@@ -4,11 +4,11 @@ import type {
   AnimalType,
   Hemisphere,
   SearchAnimalsParams,
-} from '@/model'
-import { isAvailable, sortAnimals } from '@/utils'
-import bugs from '@/data/bugs.json'
-import fishes from '@/data/fish.json'
-import seaCreatures from '@/data/sea.json'
+} from './model'
+import { isAvailable, sortAnimals } from './utils'
+import bugs from './data/bugs.json'
+import fishes from './data/fish.json'
+import seaCreatures from './data/sea.json'
 
 export const initialState = () => {
   return {

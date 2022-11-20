@@ -13,17 +13,14 @@
         <div class="media">
           <div class="media-left">
             <figure class="image is-64x64">
-              <img
-                src="https://via.placeholder.com/64"
-                :alt="animal.name['name-EUen']"
-              />
+              <img src="@/assets/64.png" :alt="animal.name['name-EUen']" />
             </figure>
           </div>
           <div class="media-content">
-            <p class="title">
+            <h1 class="title">
               {{ animal.name['name-EUen'] }}
               <AnimalType class="ml-3" :animal-type="type" />
-            </p>
+            </h1>
           </div>
         </div>
 
