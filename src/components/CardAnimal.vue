@@ -11,7 +11,8 @@
         <div class="media">
           <div class="media-left">
             <figure class="image is-64x64">
-              <img src="@/assets/64.png" :alt="source['name']['name-EUen']" />
+              <!-- <img src="@/assets/64.png" :alt="source['name']['name-EUen']" /> -->
+              <img :src="source.icon_uri" :alt="source['name']['name-EUen']" />
             </figure>
           </div>
           <div class="media-content">

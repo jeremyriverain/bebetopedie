@@ -13,7 +13,8 @@
         <div class="media">
           <div class="media-left">
             <figure class="image is-64x64">
-              <img src="@/assets/64.png" :alt="animal.name['name-EUen']" />
+              <!-- <img src="@/assets/64.png" :alt="animal.name['name-EUen']" /> -->
+              <img :src="animal.icon_uri" :alt="animal.name['name-EUen']" />
             </figure>
           </div>
           <div class="media-content">
